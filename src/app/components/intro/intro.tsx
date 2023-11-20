@@ -1,7 +1,6 @@
 import React from 'react'
 import { FaAngleDoubleDown } from 'react-icons/fa'
 import Typing from './typing'
-import Typist from 'react-text-typist'
 
 const Intro = () => {
   return (
