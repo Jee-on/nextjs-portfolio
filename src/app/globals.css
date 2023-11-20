@@ -72,6 +72,11 @@
 /*
 GENERAL STYLING
 */
+
+body {
+  font-family: "Pretendard Variable", "Pretendard","Nanum Gothic", sans-serif ;
+}
+
 section {
   font-family:
           "Pretendard Variable",
@@ -914,7 +919,7 @@ footer .copyright {
 }
 
 /*
-CONTACT 
+CONTACT
 */
 
 #sendmessage {

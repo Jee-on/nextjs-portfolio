@@ -3,6 +3,7 @@
 import React from "react";
 import {FaAngleDoubleDown} from "react-icons/fa";
 import Typing from "./typing";
+import Typist from "react-text-typist";
 
 const Intro = () => {
     return (
@@ -18,10 +19,8 @@ const Intro = () => {
                         <h2 className='intro-title mb-4'> 전성호 </h2>
                         <h3 className='intro-title2 mb-4'> 웹 개발자 포트폴리오 </h3>
                         <p className='intro-subtitle'>
-                            <span className='text-slider-items'></span>
-                            <strong className='text-slider'>
                                 <Typing/>
-                            </strong>
+                          <Typist sentences={['Front end Developer', 'Back end Developer']} />
                         </p>
                         <p className='pt-3'>
                             <a

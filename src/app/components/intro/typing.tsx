@@ -1,13 +1,8 @@
-import Typist from 'react-text-typist';
-import React from "react";
+import React from 'react'
+import Typist from 'react-text-typist'
 
-const Typing = () => {
-    return (
-        <Typist
-            sentences={['Front end Developer', 'Back end Developer']}
-
-        />
-    )
+export default function Typing() {
+  return <Typist sentences={['Front end Developer', 'Back end Developer']} />
 }
 
-export default Typing;
+
