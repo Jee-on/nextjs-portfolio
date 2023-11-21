@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { Card, Icon, Link, Stack, Typography } from '@mui/material'
 import React from 'react'

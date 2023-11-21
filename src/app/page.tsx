@@ -1,14 +1,16 @@
-import Image from 'next/image'
+import Aboutme from "@/app/components/aboutme/aboutme";
 
-
-import Intro from '@/app/components/intro/intro'
-import Aboutme from '@/app/components/aboutme/aboutme'
+import Intro from "@/app/components/intro/intro";
 
 export default function Home() {
-    return (
-<>
+  return (
+    <div id={"root"}>
+      {/*  NavBar  */}
+
       <Intro />
       <Aboutme />
-</>
-    )
+
+
+    </div>
+  );
 }
