@@ -5,7 +5,7 @@ import Intro from "@/app/components/intro/intro";
 export default function Home() {
   return (
     <div id={"root"}>
-      {/*  NavBar  */}
+
 
       <Intro />
       <Aboutme />

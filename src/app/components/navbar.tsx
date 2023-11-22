@@ -2,107 +2,105 @@
 
 import Link from "next/link";
 import React from "react";
-import React_2 from "framer-motion/dist/framer-motion";
-import useRef = React_2.useRef;
+import { useRef, useEffect, useState} from "react";
+import { SiNextdotjs } from "react-icons/si";
+import { Typography } from "@mui/material";
 
 const navItems = {
   "#intro": {
-    name: "intro",
+    name: "INTRO",
   },
   "#aboutme": {
-    name: "About Me",
+    name: "ABOUTME",
   },
   "#skills": {
-    name: "Skills",
+    name: "SKILLS",
   },
   "#projects": {
-    name: "Projects",
+    name: "PROJECTS",
   },
   "#storage": {
-    name: "Storage",
+    name: "STORAGE",
   },
   "#career": {
-    name: "Career",
+    name: "CAREER",
   },
 };
 
 export default function Navbar() {
 
-  const nav = $("nav");
-  let navHeight = nav.outerHeight();
+  const navRef = useRef<HTMLDivElement>(null);
+  const [navHeight, setNavHeight] = useState(0);
+  const [isReduced, setIsReduced] = useState(false)
 
-  $(".navbar-toggler").on("click", function () {
-    if (!$("#mainNav").hasClass("navbar-reduce")) {
-      $("#mainNav").addClass("navbar-reduce");
+  useEffect(()=> {
+    if(navRef.current) {
+      setNavHeight(navRef.current.offsetHeight);
     }
-  });
 
-  $("body").scrollspy({
-    target: "#mainNav",
-    offset: navHeight,
-  });
-
-  $(".js-scroll").on("click", function () {
-    $(".navbar-collapse").collapse("hide");
-  });
-
-  window.addEventListener("scroll", () => {
-    if (window.pageYOffset > 50) {
-      document.querySelector(".navbar-expand-md").classList.add("navbar-reduce");
-      document.querySelector(".navbar-expand-md").classList.remove("navbar-trans");
-      this.setState({});
-    } else {
-      document.querySelector(".navbar-expand-md").classList.add("navbar-trans");
-      document.querySelector(".navbar-expand-md").classList.remove("navbar-reduce");
-      this.setState({});
-    }
-  });
-
-  $('a.js-scroll[href*="#"]:not([href="#"])').on("click", function () {
-    if (
-      window.location.pathname.replace(/^\//, "") === this.pathname.replace(/^\//, "") &&
-      window.location.hostname === this.hostname
-    ) {
-      var target = $(this.hash);
-      target = target.length ? target : $("[name=" + this.hash.slice(1) + "]");
-      if (target.length) {
-        $("html, body").animate(
-          {
-            scrollTop: target.offset().top - navHeight + 5,
-          },
-          1000,
-          "easeInExpo"
-        );
-        return false;
+    const handleScroll = () => {
+      if (window.pageYOffset > 50) {
+        setIsReduced(true);
+      } else {
+        setIsReduced(false);
       }
     }
-  });
 
-  $(".js-scroll").on("click", function () {
-    $(".navbar-collapse").collapse("hide");
-  });
-}
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+
+  }, []);
+
+  const handleClick = (href: string) => {
+    const target = document.querySelector(href);
+    if(target) {
+      window.scrollTo({
+        top: target.getBoundingClientRect().top - navHeight + 5,
+        behavior: "smooth",
+      })
+    }
+  }
+
+  const handleNavTglrClick = () => {
+    if (("#mainNav").hasClass("navbar-reduce")) {
+
+    }
+  }
+
 
   return (
-    <nav ref={useRef}>
-      <div>
-        <div>
-          <ul>
-            <li>
-              <Link href="#projects" className="nav-link js-scroll">
-                Projects
-              </Link>
-            </li>
-            <li>
-              <Link href="#storage" className="nav-link js-scroll">
-                Storage
-              </Link>
-            </li>
-            <li>
-              <Link href="#career" className="nav-link js-scroll">
-                Career
-              </Link>
-            </li>
+    <nav ref={navRef} className={`navbar navbar-b navbar-expand-md fixed-top ${isReduced ? 'navbar-reduce' : 'navbar-trans'}`} id={"mainNav"}>
+
+      <div className={"container"}>
+        <a className={"navbar-brand js-scroll"} href='#page-top'>
+          <SiNextdotjs size={35} style={{ marginRight: 7 }}  />
+          JSH's Portfolio
+        </a>
+        <button
+          className='navbar-toggler collapsed'
+          type='button'
+          data-toggle='collapse'
+          data-target='#navbarDefault'
+          aria-controls='navbarDefault'
+          aria-expanded='false'
+          aria-label='Toggle navigation'>
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div className={"navbar-collapse collapse justify-content-end"} id={"navbarDefault"}>
+          <ul className={"navbar-nav"}>
+
+            {Object.entries(navItems).map(([href, { name }]) => (
+        <li key={href} className={"nav-item"}>
+          <a href={href} className='nav-link js-scroll' onClick={() => handleClick(href)}>
+            {name}
+          </a>
+        </li>
+            ))}
           </ul>
         </div>
       </div>
